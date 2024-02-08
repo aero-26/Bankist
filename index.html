@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bankist</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="images/logo.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <!--Navbar-->
+
+    <nav>
+      <div class="title">
+        <h1 id="welcome">Log in to get started</h1>
+      </div>
+      <div class="logo">
+        <img src="images/logo.png" alt="logo" class="logo-img" />
+      </div>
+      <div class="login-div">
+        <input
+          type="text"
+          name="uid"
+          id="uid"
+          class="login-aera"
+          placeholder="user"
+        />
+        <input
+          type="password"
+          name="pin"
+          id="pin"
+          maxlength="4"
+          class="login-aera"
+          placeholder="PIN"
+        />
+        <img src="images/arrow.svg" alt="arrow-img" class="arrow" />
+      </div>
+    </nav>
+
+    <!--Header Part-->
+
+    <div class="header hidden">
+      <div>
+        <h2>Current Balance</h2>
+        <h4>As on 01/02/2024, 17:10</h4>
+      </div>
+      <div>
+        <h1 class="total-bal">₹ 10,00,00,000</h1>
+      </div>
+    </div>
+
+    <!--Mini Statement-->
+
+    <div class="mini-state opacity">
+      <div class="trans hidden">
+        <div class="date-tran-type">
+          <div class="withdraw">1 WITHDRAW</div>
+          <div class="date">01/02/2024</div>
+        </div>
+        <div class="amt">-₹1,00,00,000</div>
+      </div>
+
+      <div class="trans hidden">
+        <div class="date-tran-type">
+          <div class="deposit">1 DEPOSIT</div>
+          <div class="date">01/02/2024</div>
+        </div>
+        <div class="amt">₹10,00,00,000</div>
+      </div>
+    </div>
+
+    <!--Actions-->
+
+    <div class="actions hidden">
+      <div class="action1">
+        <div class="h3-div"><h3>Transfer money</h3></div>
+        <div class="action-input">
+          <input type="text" name="payee" id="payee" placeholder="Payee" />
+          <input type="number" name="" id="" placeholder="Amount" />
+          <img src="images/go.svg" alt="go" />
+        </div>
+      </div>
+      <div class="action2">
+        <div class="h3-div"><h3>Request Loan</h3></div>
+        <div class="action-input">
+          <input type="number" name="" id="" placeholder="Amount" />
+          <img src="images/go.svg" alt="go" />
+        </div>
+      </div>
+      <div class="action3">
+        <div class="h3-div"><h3>Close Account</h3></div>
+        <div class="action-input">
+          <input type="text" name="payee" id="acc" placeholder="User" />
+          <input
+            type="password"
+            name=""
+            id=""
+            placeholder="PIN"
+            maxlength="4"
+          />
+          <img src="images/go.svg" alt="go" />
+        </div>
+      </div>
+    </div>
+
+    <!--Footer-->
+
+    <form class="footer">
+      <div class="IN-amt hidden">
+        IN
+        <div><h3>₹10,00,00,000</h3></div>
+      </div>
+      <div class="OUT-amt hidden">
+        OUT
+        <div><h3>₹1,00,00,000</h3></div>
+      </div>
+      <div class="INT-amt hidden">
+        INT
+        <div><h3>₹1,00,00,000</h3></div>
+      </div>
+      <div class="sort hidden">
+        SORT
+        <div><h3>&#x2B07;</h3></div>
+      </div>
+    </form>
+
+    <!--Logout Timer-->
+
+    <div class="logout hidden">You will be loggedd out in <b>10:00</b></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

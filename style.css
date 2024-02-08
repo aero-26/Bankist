@@ -1,0 +1,387 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+.opacity {
+  opacity: 0;
+}
+
+body {
+  background-color: #082032;
+  color: white;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 15% 10% 1fr 10%;
+  grid-template-areas:
+    "n n"
+    "h h"
+    "m b"
+    "f l";
+}
+
+nav {
+  grid-area: n;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.25rem 1.875rem;
+  align-items: center;
+  /* background-color: red; */
+}
+
+/*Nav Bar*/
+
+nav h1 {
+  font-weight: 400;
+}
+
+nav .logo-img {
+  height: 3.75rem;
+  width: 3.75rem;
+}
+
+nav .login-aera {
+  width: 7.5rem;
+  margin: 0 0.3125rem;
+  height: 2.1875rem;
+  text-align: center;
+  border-radius: 1.875rem;
+  border: 0;
+  justify-content: center;
+}
+
+.login-aera:focus-visible {
+  outline: 0.0625rem solid lightgray;
+}
+
+nav .login-div {
+  display: flex;
+  align-items: center;
+}
+
+nav .arrow {
+  height: 1.25rem;
+  width: 1.25rem;
+  margin: 0.625rem;
+  cursor: pointer;
+}
+
+nav .arrow:hover {
+  content: url(images/arrow_hover.svg);
+}
+
+.header {
+  grid-area: h;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.3125rem 3.125rem;
+  /* background-color: green; */
+}
+
+/* Header Part */
+
+.header h4 {
+  font-weight: 300;
+}
+
+/* Mini Statement */
+
+.mini-state {
+  grid-area: m;
+  background-color: white;
+  color: black;
+  height: 64vh;
+  border-radius: 0.625rem;
+  margin: 0.625rem 0.625rem 0.625rem 3.125rem;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.mini-state::-webkit-scrollbar {
+  display: none;
+}
+
+.mini-state .trans {
+  display: flex;
+  margin: 0.3125rem 0.0625rem;
+  padding: 1.25rem 0;
+  border-bottom: 0.125rem solid black;
+  justify-content: space-between;
+}
+
+.mini-state .trans .date-tran-type {
+  display: flex;
+}
+
+.mini-state .trans .date-tran-type .withdraw {
+  background: rgb(255, 26, 35);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 26, 35, 1) 25%,
+    rgba(230, 0, 9, 1) 70%,
+    rgba(179, 0, 7, 1) 98%
+  );
+  padding: 0.1875rem 0.5rem;
+  margin: 0 0.625rem;
+  align-items: center;
+  border-radius: 1.25rem;
+  text-align: center;
+  color: white;
+  display: flex;
+  font-size: 0.53125rem;
+  font-weight: 900;
+}
+
+.mini-state .trans .date-tran-type .deposit {
+  background: rgb(34, 230, 0);
+  background: linear-gradient(
+    135deg,
+    rgba(34, 230, 0, 1) 25%,
+    rgba(27, 179, 0, 1) 70%,
+    rgba(19, 128, 0, 1) 98%
+  );
+  padding: 0.1875rem 0.5rem;
+  margin: 0 0.625rem;
+  align-items: center;
+  border-radius: 1.25rem;
+  text-align: center;
+  color: white;
+  display: flex;
+  font-size: 0.53125rem;
+  font-weight: 900;
+}
+
+.mini-state .trans .date-tran-type .date {
+  margin: 0;
+  padding: 0.1875rem 0;
+  align-items: center;
+  text-align: center;
+}
+
+.mini-state .trans .amt {
+  align-items: right;
+  padding: 0.1875rem 0.625rem;
+  align-items: center;
+  margin: 0 0.625rem;
+}
+
+/* Actions */
+
+.actions {
+  grid-area: b;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas:
+    "a1"
+    "a2"
+    "a3";
+  /* background-color: aqua; */
+}
+
+.actions input {
+  text-align: center;
+  width: 5rem;
+  margin: 0.3125rem;
+  height: 1.875rem;
+  border-radius: 0.625rem;
+  border: none;
+}
+
+.actions input:focus-visible {
+  outline: 0.0625rem solid lightgrey;
+}
+
+.actions .h3-div {
+  display: flex;
+  justify-content: start;
+  margin: 1.875rem 1.25rem 0.625rem 1.25rem;
+}
+
+.actions img {
+  width: 1.875rem;
+  margin: 0 0.3125rem;
+  background-color: white;
+  padding: 0 0.625rem;
+  border-radius: 0.625rem;
+  cursor: pointer;
+}
+
+.actions img:hover {
+  filter: invert(100%);
+}
+
+.actions .action-input {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin: 0.625rem 0.9375rem;
+}
+
+.action1 {
+  grid-area: a1;
+  background: rgb(101, 231, 184);
+  background: linear-gradient(
+    135deg,
+    rgba(101, 231, 184, 1) 25%,
+    rgba(56, 224, 163, 1) 70%,
+    rgba(31, 199, 138, 1) 98%
+  );
+  border-radius: 0.625rem;
+  margin: 0.625rem 3.125rem 0.625rem 0;
+  color: black;
+}
+
+.action2 {
+  grid-area: a2;
+  background: rgb(152, 252, 28);
+  background: linear-gradient(
+    135deg,
+    rgba(152, 252, 28, 1) 25%,
+    rgba(127, 227, 3, 1) 70%,
+    rgba(99, 176, 2, 1) 98%
+  );
+  border-radius: 0.625rem;
+  margin: 0 3.125rem 0.625rem 0;
+  color: black;
+}
+
+.action3 {
+  grid-area: a3;
+  background: rgb(247, 255, 86);
+  background: linear-gradient(
+    135deg,
+    rgba(247, 255, 86, 1) 25%,
+    rgba(244, 255, 26, 1) 70%,
+    rgba(219, 230, 0, 1) 98%
+  );
+  border-radius: 0.625rem;
+  margin: 0px 3.125rem 0.625rem 0px;
+  color: black;
+}
+
+/* Footer */
+
+.footer {
+  grid-area: f;
+  /* background-color: seagreen; */
+  margin: 0.3125rem;
+  display: flex;
+}
+
+.footer h3 {
+  margin-left: 0.3125rem;
+}
+
+.footer .IN-amt {
+  display: flex;
+  margin-left: 3.125rem;
+  color: rgb(34, 230, 0);
+}
+
+.footer .OUT-amt {
+  display: flex;
+  margin-left: 0.5rem;
+  color: rgb(255, 26, 35);
+}
+
+.footer .INT-amt {
+  display: flex;
+  margin-left: 0.5rem;
+}
+
+.footer .sort {
+  display: flex;
+  margin-left: 0.5rem;
+}
+
+.footer .sort h3 {
+  cursor: pointer;
+}
+
+/* Logout Timer */
+
+.logout {
+  /* background-color: lawngreen; */
+  text-align: end;
+  margin: 0.3125rem;
+  margin-right: 3.125rem;
+}
+
+/* Media query */
+
+@media screen and (max-width: 800px) {
+  /* Nav Bar */
+
+  nav {
+    margin: 0.625rem;
+    margin-right: 0.1875rem;
+  }
+
+  /* Header Part */
+
+  .header {
+    margin: 0 0.9375rem;
+  }
+
+  /* Mini Statement */
+
+  .mini-state {
+    margin: 0.3125rem;
+    margin-left: 0.625rem;
+    margin-bottom: 0;
+  }
+
+  /* Actions */
+
+  .action1 {
+    margin: 0.3125rem 0.3125rem 0 0.3125rem;
+    margin-right: 0.625rem;
+  }
+
+  .action2 {
+    margin: 0.3125rem 0.3125rem 0 0.3125rem;
+    margin-right: 0.625rem;
+  }
+
+  .action3 {
+    margin: 0.3125rem 0.3125rem 0 0.3125rem;
+    margin-right: 0.625rem;
+  }
+
+  /* Footer */
+
+  .footer .IN-amt {
+    margin-left: 0.625rem;
+  }
+
+  /* Logout Timer */
+
+  .logout {
+    margin-right: 0.625rem;
+  }
+}
+
+@media screen and (max-width: 710px) {
+  .footer {
+    font-size: 0.75rem;
+  }
+
+  .logout {
+    font-size: 0.75rem;
+  }
+}
