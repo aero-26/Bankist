@@ -172,9 +172,3 @@ body.addEventListener("keydown", (e) => {
 });
 
 // Transferring money function
-for (let a = 1; a <= 4; a++) {
-  console.log(a);
-  for (let b = 1; b <= a; b++) {
-    console.log(`@`);
-  }
-}
