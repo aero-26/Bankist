@@ -1,6 +1,7 @@
 "use strict";
 
 // Selectors elements
+const body = document.querySelector("body");
 const miniStatement = document.getElementsByClassName("mini-state")[0];
 const totalInAmt = document.getElementsByClassName("IN-amt")[0];
 const totalOutAmt = document.getElementsByClassName("OUT-amt")[0];
@@ -127,6 +128,11 @@ const int = (user) => {
 
 // Using input button
 logInBtn.addEventListener("click", () => {
+  loginFunc();
+});
+
+// Login Function
+const loginFunc = function () {
   const uIdInput = uId.value;
   const pinInput = Number(PIN.value);
   const accs = acc;
@@ -153,9 +159,22 @@ logInBtn.addEventListener("click", () => {
     }
   });
   PIN.value = uId.value = "";
-});
+};
 
 // To insert the uid for each account
 acc.forEach((acc) => {
   uid(acc);
 });
+
+// Adding enter to login
+body.addEventListener("keydown", (e) => {
+  e.key === "Enter" ? loginFunc() : null;
+});
+
+// Transferring money function
+for (let a = 1; a <= 4; a++) {
+  console.log(a);
+  for (let b = 1; b <= a; b++) {
+    console.log(`@`);
+  }
+}
