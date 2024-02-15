@@ -186,11 +186,16 @@ body.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     loginFunc();
     clearInput();
+    transferFunc();
   }
 });
 
-// Transferring money function
+// Transferring money on Click
 transAmtBtn.addEventListener("click", () => {
+  transferFunc();
+});
+
+const transferFunc = function () {
   acc.forEach((accountUid, i) => {
     if (
       payee.value == accountUid.uid &&
@@ -199,7 +204,6 @@ transAmtBtn.addEventListener("click", () => {
       Number(transAmt.value) <
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
     ) {
-      // console.log("Match Found");
       acc[0].trans.push(Number(`-${transAmt.value}`));
       transDetail(acc[0]);
       outAmt(acc[0]);
@@ -209,4 +213,12 @@ transAmtBtn.addEventListener("click", () => {
       acc[i].trans.push(Number(`${transAmt.value}`));
     }
   });
-});
+  clearTransfer();
+};
+
+// Clear Transfer Fields
+const clearTransfer = function () {
+  payee.value = transAmt.value = "";
+  payee.blur();
+  transAmt.blur();
+};
