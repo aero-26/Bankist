@@ -15,6 +15,9 @@ const header = document.getElementsByClassName("header")[0];
 const actions = document.getElementsByClassName("actions")[0];
 const logout = document.getElementsByClassName("logout")[0];
 const sort = document.getElementsByClassName("sort")[0];
+const payee = document.getElementById("payee");
+const transAmt = document.getElementById("trans-amt");
+const transAmtBtn = document.getElementById("trans-amt-ico");
 
 // Selector for int in and out Amount
 let inH3Val;
@@ -48,7 +51,6 @@ const acc = [user1, user2, user3];
 // Pushing Transactions function
 const transDetail = (user) => {
   user["trans"].forEach((item, index) => {
-    // console.log(item, index);
     if (item < 0) {
       miniStatement.insertAdjacentHTML(
         "afterbegin",
@@ -129,7 +131,11 @@ const int = (user) => {
 // Using input button
 logInBtn.addEventListener("click", () => {
   loginFunc();
+  clearInput();
 });
+
+// Recording User details
+let currUsr;
 
 // Login Function
 const loginFunc = function () {
@@ -156,9 +162,18 @@ const loginFunc = function () {
       actions.classList.remove("hidden");
       logout.classList.remove("hidden");
       sort.classList.remove("hidden");
+
+      // Recording current User
+      currUsr = uIdInput;
     }
   });
+};
+
+// Clear Login Fields
+const clearInput = function () {
   PIN.value = uId.value = "";
+  uId.blur();
+  PIN.blur();
 };
 
 // To insert the uid for each account
@@ -168,7 +183,30 @@ acc.forEach((acc) => {
 
 // Adding enter to login
 body.addEventListener("keydown", (e) => {
-  e.key === "Enter" ? loginFunc() : null;
+  if (e.key === "Enter") {
+    loginFunc();
+    clearInput();
+  }
 });
 
 // Transferring money function
+transAmtBtn.addEventListener("click", () => {
+  acc.forEach((accountUid, i) => {
+    if (
+      payee.value == accountUid.uid &&
+      payee.value != currUsr &&
+      Number(transAmt.value) > 0 &&
+      Number(transAmt.value) <
+        Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
+    ) {
+      // console.log("Match Found");
+      acc[0].trans.push(Number(`-${transAmt.value}`));
+      transDetail(acc[0]);
+      outAmt(acc[0]);
+      mainBal.textContent = `₹${
+        Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
+      }`;
+      acc[i].trans.push(Number(`${transAmt.value}`));
+    }
+  });
+});
