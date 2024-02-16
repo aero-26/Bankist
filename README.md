@@ -15,8 +15,10 @@
 
 ### To send Money
 You can send money to any of the stated account jc, yo, fa. But you can't send money to yourself XD.
+
 **for example - yo 2000**
 
 ### To close Account
 You need to put the current user's Uid and pin in order to delete the account.
+
 **for example - jc  1111**
