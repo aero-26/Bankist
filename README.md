@@ -14,7 +14,7 @@
 **for example - yo 3333**
 
 ### To send Money
-You can send money to any of the stated account jc, yo, fa. But you can't send money to yourself XD or in the account you're currently logged in.
+You can send money to any of the stated account **jc, yo, fa**. But you can't send money to yourself XD or in the account you're currently logged in.
 
 **for example - yo 2000**
 
