@@ -204,12 +204,16 @@ const transferFunc = function () {
       Number(transAmt.value) <
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
     ) {
-      acc[0].trans.push(Number(`-${transAmt.value}`));
-      transDetail(acc[0]);
-      outAmt(acc[0]);
+      // Deduct and update in Sender's Account
+      const currUsrDetail = acc.findIndex((usr) => usr.uid == currUsr);
+      acc[currUsrDetail].trans.push(Number(`-${transAmt.value}`));
+      transDetail(acc[currUsrDetail]);
+      outAmt(acc[currUsrDetail]);
       mainBal.textContent = `₹${
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
       }`;
+
+      // Add amount to transfree account
       acc[i].trans.push(Number(`${transAmt.value}`));
     }
   });
@@ -222,3 +226,5 @@ const clearTransfer = function () {
   payee.blur();
   transAmt.blur();
 };
+
+// Closing Account
