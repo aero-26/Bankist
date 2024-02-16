@@ -10,6 +10,7 @@
 |jc| 1111 |
 |yo| 2222 |
 |fa| 3333 |
+
 **for example - yo 3333**
 
 ### To send Money
