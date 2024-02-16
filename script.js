@@ -18,6 +18,9 @@ const sort = document.getElementsByClassName("sort")[0];
 const payee = document.getElementById("payee");
 const transAmt = document.getElementById("trans-amt");
 const transAmtBtn = document.getElementById("trans-amt-ico");
+const clAccBtn = document.getElementById("cl-acc-btn");
+const clAcc = document.getElementById("cl-acc");
+const clPin = document.getElementById("cl-pin");
 
 // Selector for int in and out Amount
 let inH3Val;
@@ -136,6 +139,7 @@ logInBtn.addEventListener("click", () => {
 
 // Recording User details
 let currUsr;
+let currUsrPIN;
 
 // Login Function
 const loginFunc = function () {
@@ -165,6 +169,7 @@ const loginFunc = function () {
 
       // Recording current User
       currUsr = uIdInput;
+      currUsrPIN = pinInput;
     }
   });
 };
@@ -181,12 +186,13 @@ acc.forEach((acc) => {
   uid(acc);
 });
 
-// Adding enter to login
+// Adding enter to login transfer and close account
 body.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     loginFunc();
     clearInput();
     transferFunc();
+    closingAcc();
   }
 });
 
@@ -195,6 +201,7 @@ transAmtBtn.addEventListener("click", () => {
   transferFunc();
 });
 
+// Transfer money Function
 const transferFunc = function () {
   acc.forEach((accountUid, i) => {
     if (
@@ -205,10 +212,10 @@ const transferFunc = function () {
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
     ) {
       // Deduct and update in Sender's Account
-      const currUsrDetail = acc.findIndex((usr) => usr.uid == currUsr);
-      acc[currUsrDetail].trans.push(Number(`-${transAmt.value}`));
-      transDetail(acc[currUsrDetail]);
-      outAmt(acc[currUsrDetail]);
+      const currUsrId = acc.findIndex((usr) => usr.uid == currUsr);
+      acc[currUsrId].trans.push(Number(`-${transAmt.value}`));
+      transDetail(acc[currUsrId]);
+      outAmt(acc[currUsrId]);
       mainBal.textContent = `₹${
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
       }`;
@@ -227,4 +234,30 @@ const clearTransfer = function () {
   transAmt.blur();
 };
 
-// Closing Account
+// Close Account on button click
+clAccBtn.addEventListener("click", () => {
+  closingAcc();
+});
+
+// Closing Account Function
+const closingAcc = function () {
+  if (clAcc.value == currUsr && clPin.value == currUsrPIN) {
+    const currUsrIndex = acc.findIndex((users) => users.uid == currUsr);
+    acc.splice(currUsrIndex, 1);
+
+    // Logout and clearing records
+
+    // Changing the Welcome Message
+    welcome.innerHTML = `Log in to get started`;
+
+    // Adding the classes to hide components
+    header.classList.add("hidden");
+    actions.classList.add("hidden");
+    logout.classList.add("hidden");
+    sort.classList.add("hidden");
+    totalInAmt.classList.add("hidden");
+    totalInt.classList.add("hidden");
+    totalOutAmt.classList.add("hidden");
+    miniStatement.classList.add("opacity");
+  }
+};
