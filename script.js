@@ -213,6 +213,7 @@ const update = function (index) {
   transDetail(acc[index]);
   inAmt(acc[index]);
   int(acc[index]);
+  outAmt(acc[index]);
   mainBal.textContent = `₹${(
     Number(inH3Val) +
     Number(intH3Val) +
