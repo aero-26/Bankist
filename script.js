@@ -21,6 +21,8 @@ const transAmtBtn = document.getElementById("trans-amt-ico");
 const clAccBtn = document.getElementById("cl-acc-btn");
 const clAcc = document.getElementById("cl-acc");
 const clPin = document.getElementById("cl-pin");
+const reqBtn = document.getElementById("req-btn");
+const loanAmt = document.getElementById("loan-amt");
 
 // Selector for int in and out Amount
 let inH3Val;
@@ -131,7 +133,7 @@ const int = (user) => {
   intH3Val = total;
 };
 
-// Using input button
+// Using login button
 logInBtn.addEventListener("click", () => {
   loginFunc();
   clearInput();
@@ -140,6 +142,12 @@ logInBtn.addEventListener("click", () => {
 // Recording User details
 let currUsr;
 let currUsrPIN;
+let currUsrIndex;
+
+// Recordig currUsrIndex
+const calIndex = function (currUsr) {
+  return acc.findIndex((users) => users.uid == currUsr);
+};
 
 // Login Function
 const loginFunc = function () {
@@ -170,9 +178,23 @@ const loginFunc = function () {
       // Recording current User
       currUsr = uIdInput;
       currUsrPIN = pinInput;
+      currUsrIndex = calIndex(currUsr);
     }
   });
 };
+
+// Assigning enter to login, transfer, loan and close account
+body.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    loginFunc();
+    clearInput();
+    transferFunc();
+    closingAcc();
+    clearClAcc();
+    transLoan();
+    clearLoan();
+  }
+});
 
 // Clear Login Fields
 const clearInput = function () {
@@ -186,15 +208,17 @@ acc.forEach((acc) => {
   uid(acc);
 });
 
-// Adding enter to login transfer and close account
-body.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    loginFunc();
-    clearInput();
-    transferFunc();
-    closingAcc();
-  }
-});
+// Update the records
+const update = function (index) {
+  transDetail(acc[index]);
+  inAmt(acc[index]);
+  int(acc[index]);
+  mainBal.textContent = `₹${(
+    Number(inH3Val) +
+    Number(intH3Val) +
+    Number(outH3Val)
+  ).toFixed(2)}`;
+};
 
 // Transferring money on Click
 transAmtBtn.addEventListener("click", () => {
@@ -211,14 +235,8 @@ const transferFunc = function () {
       Number(transAmt.value) <
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
     ) {
-      // Deduct and update in Sender's Account
-      const currUsrId = acc.findIndex((usr) => usr.uid == currUsr);
-      acc[currUsrId].trans.push(Number(`-${transAmt.value}`));
-      transDetail(acc[currUsrId]);
-      outAmt(acc[currUsrId]);
-      mainBal.textContent = `₹${
-        Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
-      }`;
+      acc[currUsrIndex].trans.push(Number(`-${transAmt.value}`));
+      update(currUsrIndex);
 
       // Add amount to transfree account
       acc[i].trans.push(Number(`${transAmt.value}`));
@@ -237,27 +255,60 @@ const clearTransfer = function () {
 // Close Account on button click
 clAccBtn.addEventListener("click", () => {
   closingAcc();
+  clearClAcc();
 });
 
 // Closing Account Function
 const closingAcc = function () {
   if (clAcc.value == currUsr && clPin.value == currUsrPIN) {
-    const currUsrIndex = acc.findIndex((users) => users.uid == currUsr);
     acc.splice(currUsrIndex, 1);
 
-    // Logout and clearing records
+    // Closing Acocunt
 
     // Changing the Welcome Message
     welcome.innerHTML = `Log in to get started`;
 
     // Adding the classes to hide components
+    totalInAmt.classList.add("hidden");
+    totalInt.classList.add("hidden");
     header.classList.add("hidden");
     actions.classList.add("hidden");
     logout.classList.add("hidden");
     sort.classList.add("hidden");
-    totalInAmt.classList.add("hidden");
-    totalInt.classList.add("hidden");
     totalOutAmt.classList.add("hidden");
     miniStatement.classList.add("opacity");
   }
+};
+
+// Clear Close Account Fields
+const clearClAcc = function () {
+  clAcc.value = "";
+  clPin.value = "";
+  clAcc.blur();
+  clPin.blur();
+};
+
+// Granting Loan on click
+reqBtn.addEventListener("click", () => {
+  transLoan();
+  clearLoan();
+});
+
+// Transferring the loan amount
+const transLoan = function () {
+  if (currUsrIndex != undefined) {
+    const grantLoan = acc[currUsrIndex]["trans"].some(
+      (amt) => Number(loanAmt.value) * 0.1 < amt
+    );
+    if (grantLoan == true && Number(loanAmt.value) > 0) {
+      acc[currUsrIndex]["trans"].push(Number(loanAmt.value));
+      update(currUsrIndex);
+    }
+  }
+};
+
+// Clear Laon Fields
+const clearLoan = function () {
+  loanAmt.value = "";
+  loanAmt.blur();
 };
