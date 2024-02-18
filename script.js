@@ -23,6 +23,7 @@ const clAcc = document.getElementById("cl-acc");
 const clPin = document.getElementById("cl-pin");
 const reqBtn = document.getElementById("req-btn");
 const loanAmt = document.getElementById("loan-amt");
+const sortBtn = document.getElementById("sort-btn");
 
 // Selector for int in and out Amount
 let inH3Val;
@@ -179,6 +180,9 @@ const loginFunc = function () {
       currUsr = uIdInput;
       currUsrPIN = pinInput;
       currUsrIndex = calIndex(currUsr);
+
+      // Backing up the transaction array for sorting
+      transBackup = transDuplicate(currUsrIndex);
     }
   });
 };
@@ -241,6 +245,9 @@ const transferFunc = function () {
 
       // Add amount to transfree account
       acc[i].trans.push(Number(`${transAmt.value}`));
+
+      // Deducting money to backup trans too
+      transBackup.push(Number(`-${transAmt.value}`));
     }
   });
   clearTransfer();
@@ -304,6 +311,7 @@ const transLoan = function () {
     if (grantLoan == true && Number(loanAmt.value) > 0) {
       acc[currUsrIndex]["trans"].push(Number(loanAmt.value));
       update(currUsrIndex);
+      transBackup.push(Number(loanAmt.value));
     }
   }
 };
@@ -313,3 +321,31 @@ const clearLoan = function () {
   loanAmt.value = "";
   loanAmt.blur();
 };
+
+// Sort Function
+
+// Backing up trans array for sor purpose
+const transDuplicate = () => acc[currUsrIndex].trans.slice();
+let transBackup;
+
+// Storing sorted values
+const tranSort = () => {
+  return acc[currUsrIndex]["trans"].sort((a, b) => a - b);
+};
+
+// Assigning default value to sort button
+let sortCondition = false;
+
+sortBtn.addEventListener("click", () => {
+  miniStatement.innerHTML = "";
+  if (!sortCondition) {
+    tranSort();
+    transDetail(acc[currUsrIndex]);
+    sortCondition = true;
+  } else {
+    acc[currUsrIndex].trans = [...transBackup];
+    transDetail(acc[currUsrIndex]);
+    console.log(transBackup);
+    sortCondition = false;
+  }
+});
