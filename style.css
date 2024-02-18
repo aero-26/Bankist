@@ -307,6 +307,7 @@ nav .arrow:hover {
 .footer .sort {
   display: flex;
   margin-left: 0.5rem;
+  cursor: pointer;
 }
 
 .footer .sort h3 {
