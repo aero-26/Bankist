@@ -65,10 +65,10 @@ const curr_yr = String(currentTime.getFullYear());
 
 // Format for time
 const curr_hr = String(currentTime.getHours()).padStart(2, "0");
-const curr_min = String(currentTime.getUTCMinutes()).padStart(2, "0");
+const curr_min = String(currentTime.getMinutes()).padStart(2, "0");
 
 // Replacing the date with the current date
-today[0].textContent = `As on ${curr_dd}/${curr_mm}/${curr_yr}, ${curr_hr}:10`;
+today[0].textContent = `As on ${curr_dd}/${curr_mm}/${curr_yr}, ${curr_hr}:${curr_min}`;
 
 // Pushing Transactions function
 const transDetail = (user) => {
