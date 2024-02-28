@@ -69,7 +69,18 @@ const user2 = {
 const user3 = {
   uName: "Fedor Alisa",
   trans: [2745, 8190, -5465, -2030, 7355, -2340, 8765, -5090, 7215, 3980],
-  dates: ['2023-02-27T00:00:00.000Z', '2023-03-02T00:00:00.000Z', '2023-05-01T00:00:00.000Z', '2023-06-09T00:00:00.000Z', '2023-07-03T00:00:00.000Z', '2023-07-13T00:00:00.000Z', '2023-08-11T00:00:00.000Z', '2023-09-05T00:00:00.000Z','2023-09-22T00:00:00.000Z', '2023-10-10T00:00:00.000Z'],
+  dates: [
+    "2023-02-27T00:00:00.000Z",
+    "2023-03-02T00:00:00.000Z",
+    "2023-05-01T00:00:00.000Z",
+    "2023-06-09T00:00:00.000Z",
+    "2023-07-03T00:00:00.000Z",
+    "2023-07-13T00:00:00.000Z",
+    "2023-08-11T00:00:00.000Z",
+    "2023-09-05T00:00:00.000Z",
+    "2023-09-22T00:00:00.000Z",
+    "2023-10-10T00:00:00.000Z",
+  ],
   intRate: 1.5,
   pin: 3333,
 };
@@ -91,6 +102,23 @@ const curr_min = String(currentTime.getMinutes()).padStart(2, "0");
 // Replacing the date with the current date
 today[0].textContent = `As on ${curr_dd}/${curr_mm}/${curr_yr}, ${curr_hr}:${curr_min}`;
 
+// Recording transaction Date
+const transDate = (user, i) => {
+  const DDMMYY = [];
+  const dateOfTrans = new Date(user["dates"][i]);
+
+  // Pushing Date
+  DDMMYY.push(String(dateOfTrans.getDate()).padStart(2, "0"));
+
+  // Pushing Month
+  DDMMYY.push(String(dateOfTrans.getMonth() + 1).padStart(2, "0"));
+
+  // Pushing Year
+  DDMMYY.push(String(dateOfTrans.getFullYear()));
+
+  return DDMMYY;
+};
+
 // Pushing Transactions function
 const transDetail = (user) => {
   user["trans"].forEach((item, index) => {
@@ -100,7 +128,9 @@ const transDetail = (user) => {
         `<div class="trans">
         <div class="date-tran-type">
           <div class="withdraw">${index + 1} WITHDRAW</div>
-          <div class="date">01/02/2024</div>
+          <div class="date">${transDate(user, index)[0]}/${
+          transDate(user, index)[1]
+        }/${transDate(user, index)[2]}</div>
         </div>
         <div class="amt">-₹${Math.abs(item)}</div>
       </div>`
@@ -111,7 +141,9 @@ const transDetail = (user) => {
         `<div class="trans">
         <div class="date-tran-type">
           <div class="deposit">${index + 1} DEPOSIT</div>
-          <div class="date">01/02/2024</div>
+          <div class="date">${transDate(user, index)[0]}/${
+          transDate(user, index)[1]
+        }/${transDate(user, index)[2]}</div>
         </div>
         <div class="amt">₹${item}</div>
       </div>`
@@ -397,5 +429,3 @@ body.addEventListener("keypress", (e) => {
     logInBtn.click();
   }
 });
-
-
