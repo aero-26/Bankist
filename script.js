@@ -420,14 +420,3 @@ sortBtn.addEventListener("click", () => {
     sortCondition = false;
   }
 });
-
-// For Testing Purpose
-
-// Fake login on reload
-body.addEventListener("keypress", (e) => {
-  if (e.key === "i") {
-    uId.value = "jc";
-    PIN.value = "1111";
-    logInBtn.click();
-  }
-});
