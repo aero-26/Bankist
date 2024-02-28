@@ -310,10 +310,12 @@ const transferFunc = function () {
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
     ) {
       acc[currUsrIndex].trans.push(Number(`-${transAmt.value}`));
+      acc[currUsrIndex].dates.push(currentTime.toISOString());
       update(currUsrIndex);
 
       // Add amount to transfree account
       acc[i].trans.push(Number(`${transAmt.value}`));
+      acc[i].dates.push(currentTime.toISOString());
 
       // Deducting money to backup trans too
       transBackup.push(Number(`-${transAmt.value}`));
@@ -379,6 +381,7 @@ const transLoan = function () {
     );
     if (grantLoan == true && Number(loanAmt.value) > 0) {
       acc[currUsrIndex]["trans"].push(Number(loanAmt.value));
+      acc[currUsrIndex]["dates"].push(currentTime.toISOString());
       update(currUsrIndex);
       transBackup.push(Number(loanAmt.value));
     }
@@ -414,7 +417,6 @@ sortBtn.addEventListener("click", () => {
   } else {
     acc[currUsrIndex].trans = [...transBackup];
     transDetail(acc[currUsrIndex]);
-    console.log(transBackup);
     sortCondition = false;
   }
 });
