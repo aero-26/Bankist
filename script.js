@@ -107,16 +107,20 @@ const transDate = (user, i) => {
   const DDMMYY = [];
   const dateOfTrans = new Date(user["dates"][i]);
 
-  // Pushing Date
-  DDMMYY.push(String(dateOfTrans.getDate()).padStart(2, "0"));
+  if (currentTime - dateOfTrans <= 24 * 60 * 60 * 1000) {
+    return `TODAY`;
+  } else {
+    // Pushing Date
+    DDMMYY.push(String(dateOfTrans.getDate()).padStart(2, "0"));
 
-  // Pushing Month
-  DDMMYY.push(String(dateOfTrans.getMonth() + 1).padStart(2, "0"));
+    // Pushing Month
+    DDMMYY.push(String(dateOfTrans.getMonth() + 1).padStart(2, "0"));
 
-  // Pushing Year
-  DDMMYY.push(String(dateOfTrans.getFullYear()));
+    // Pushing Year
+    DDMMYY.push(String(dateOfTrans.getFullYear()));
 
-  return DDMMYY;
+    return `${DDMMYY[0]}/${DDMMYY[1]}/${DDMMYY[2]}`;
+  }
 };
 
 // Pushing Transactions function
@@ -128,9 +132,7 @@ const transDetail = (user) => {
         `<div class="trans">
         <div class="date-tran-type">
           <div class="withdraw">${index + 1} WITHDRAW</div>
-          <div class="date">${transDate(user, index)[0]}/${
-          transDate(user, index)[1]
-        }/${transDate(user, index)[2]}</div>
+          <div class="date">${transDate(user, index)}</div>
         </div>
         <div class="amt">-₹${Math.abs(item).toFixed(2)}</div>
       </div>`
@@ -141,9 +143,7 @@ const transDetail = (user) => {
         `<div class="trans">
         <div class="date-tran-type">
           <div class="deposit">${index + 1} DEPOSIT</div>
-          <div class="date">${transDate(user, index)[0]}/${
-          transDate(user, index)[1]
-        }/${transDate(user, index)[2]}</div>
+          <div class="date">${transDate(user, index)}</div>
         </div>
         <div class="amt">₹${item.toFixed(2)}</div>
       </div>`
