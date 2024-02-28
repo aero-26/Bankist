@@ -306,7 +306,7 @@ const transferFunc = function () {
       payee.value == accountUid.uid &&
       payee.value != currUsr &&
       Number(transAmt.value) > 0 &&
-      Number(transAmt.value) <
+      Number(transAmt.value) <=
         Number(inH3Val) + Number(intH3Val) + Number(outH3Val)
     ) {
       acc[currUsrIndex].trans.push(Number(`-${transAmt.value}`));
@@ -380,10 +380,10 @@ const transLoan = function () {
       (amt) => Number(loanAmt.value) * 0.1 < amt
     );
     if (grantLoan == true && Number(loanAmt.value) > 0) {
-      acc[currUsrIndex]["trans"].push(Number(loanAmt.value));
+      acc[currUsrIndex]["trans"].push(Math.trunc(Number(loanAmt.value)));
       acc[currUsrIndex]["dates"].push(currentTime.toISOString());
       update(currUsrIndex);
-      transBackup.push(Number(loanAmt.value));
+      transBackup.push(Math.trunc(Number(loanAmt.value)));
     }
   }
 };
