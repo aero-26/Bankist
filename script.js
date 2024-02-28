@@ -132,7 +132,7 @@ const transDetail = (user) => {
           transDate(user, index)[1]
         }/${transDate(user, index)[2]}</div>
         </div>
-        <div class="amt">-₹${Math.abs(item)}</div>
+        <div class="amt">-₹${Math.abs(item).toFixed(2)}</div>
       </div>`
       );
     } else {
@@ -145,7 +145,7 @@ const transDetail = (user) => {
           transDate(user, index)[1]
         }/${transDate(user, index)[2]}</div>
         </div>
-        <div class="amt">₹${item}</div>
+        <div class="amt">₹${item.toFixed(2)}</div>
       </div>`
       );
     }
@@ -170,7 +170,7 @@ const inAmt = (user) => {
 
   totalInAmt.classList.remove("hidden");
   totalInAmt.innerHTML = `IN
-        <div><h3>₹${total}</h3></div>`;
+        <div><h3>₹${total.toFixed(2)}</h3></div>`;
 
   inH3Val = total;
 };
@@ -183,7 +183,7 @@ const outAmt = (user) => {
 
   totalOutAmt.classList.remove("hidden");
   totalOutAmt.innerHTML = `OUT
-        <div><h3>₹${Math.abs(total)}</h3></div>`;
+        <div><h3>₹${Math.abs(total).toFixed(2)}</h3></div>`;
 
   outH3Val = total;
 };
