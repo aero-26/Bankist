@@ -24,6 +24,7 @@ const clPin = document.getElementById("cl-pin");
 const reqBtn = document.getElementById("req-btn");
 const loanAmt = document.getElementById("loan-amt");
 const sortBtn = document.getElementById("sort-btn");
+const today = document.getElementsByClassName("today");
 
 // Selector for int in and out Amount
 let inH3Val;
@@ -53,6 +54,21 @@ const user3 = {
 };
 
 const acc = [user1, user2, user3];
+
+// Working on Dates
+const currentTime = new Date();
+
+// Format for date
+const curr_dd = String(currentTime.getDate()).padStart(2, "0");
+const curr_mm = String(currentTime.getMonth() + 1).padStart(2, "0");
+const curr_yr = String(currentTime.getFullYear());
+
+// Format for time
+const curr_hr = String(currentTime.getHours()).padStart(2, "0");
+const curr_min = String(currentTime.getUTCMinutes()).padStart(2, "0");
+
+// Replacing the date with the current date
+today[0].textContent = `As on ${curr_dd}/${curr_mm}/${curr_yr}, ${curr_hr}:10`;
 
 // Pushing Transactions function
 const transDetail = (user) => {
@@ -347,5 +363,14 @@ sortBtn.addEventListener("click", () => {
     transDetail(acc[currUsrIndex]);
     console.log(transBackup);
     sortCondition = false;
+  }
+});
+
+// Fake login on reload
+body.addEventListener("keypress", (e) => {
+  if (e.key === "i") {
+    uId.value = "jc";
+    PIN.value = "1111";
+    logInBtn.click();
   }
 });
