@@ -396,7 +396,7 @@ const clearLoan = function () {
 
 // Sort Function
 
-// Backing up trans array for sor purpose
+// Backing up trans array for sort purpose
 const transDuplicate = () => acc[currUsrIndex].trans.slice();
 let transBackup;
 
