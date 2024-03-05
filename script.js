@@ -14,6 +14,7 @@ const mainBal = document.getElementsByClassName("total-bal")[0];
 const header = document.getElementsByClassName("header")[0];
 const actions = document.getElementsByClassName("actions")[0];
 const logout = document.getElementsByClassName("logout")[0];
+const logoutTimer = document.getElementById("timer");
 const sort = document.getElementsByClassName("sort")[0];
 const payee = document.getElementById("payee");
 const transAmt = document.getElementById("trans-amt");
@@ -245,6 +246,9 @@ const loginFunc = function () {
       logout.classList.remove("hidden");
       sort.classList.remove("hidden");
 
+      // Start the logout timer
+      countDown(seconds);
+
       // Recording current User
       currUsr = uIdInput;
       currUsrPIN = pinInput;
@@ -420,3 +424,22 @@ sortBtn.addEventListener("click", () => {
     sortCondition = false;
   }
 });
+
+// Implementing logout timer
+let seconds = 600;
+
+const countDown = (timer) => {
+  // Converting Time to mins and seconds
+  let min = String(Math.trunc(timer / 60)).padStart(2, 0);
+  let sec = String(Math.trunc(timer % 60)).padStart(2, 0);
+
+  if (timer === 0) {
+    window.location.reload();
+  } else {
+    setTimeout(() => {
+      logoutTimer.innerText = `${min}:${sec}`;
+      timer--;
+      countDown(timer);
+    }, 1000);
+  }
+};
